@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head>
+<head th:replace="/layout :: head">
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
 <a href="/create-customer">Create new customer</a>
-<h1>Customers</h1>
+
+<h3>Customers</h3>
+<form>
+    Search by first name:
+    <input name="search" type="text"/>
+    <input type="submit" value="Search"/>
+</form>
+<br/>
 <table border="1">
     <tr>
         <th>First name</th>
@@ -25,5 +32,16 @@
         </tr>
     </th:block>
 </table>
+
+<div>
+    <a th:href="@{'/customers'(page=${customers.number - 1})}" th:if="${customers.hasPrevious()}">Previous</a>
+    <span th:text="${customers.number + 1}"></span>/<span th:text="${customers.totalPages}"></span>
+    <a th:href="@{'/customers'(page=${customers.number + 1})}" th:if="${customers.hasNext()}">Next</a>
+</div>
+
+<a href="/customers">Back to customer</a>
+
+<footer th:replace="/layout :: footer"></footer>
+
 </body>
 </html>
