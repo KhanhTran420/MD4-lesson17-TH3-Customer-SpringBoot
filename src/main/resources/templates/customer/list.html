@@ -39,8 +39,8 @@
     <a th:href="@{'/'(page=${customers.number + 1})}" th:if="${customers.hasNext()}">Next</a>
 </div>
 
-<a href="/">Back to customer</a>
-
+<a href="/">Back to customer</a><br>
+<a href="/logout" style="color: red">Dang xuat tai khoan</a>
 <footer th:replace="/layout :: footer"></footer>
 
 </body>
