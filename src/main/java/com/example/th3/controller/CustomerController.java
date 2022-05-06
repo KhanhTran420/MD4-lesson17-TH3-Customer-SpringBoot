@@ -5,7 +5,6 @@ import com.example.th3.service.ICustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -33,7 +32,7 @@ public class CustomerController {
         return  modelAndView;
     }
 
-    @GetMapping("/customers")
+    @GetMapping("/")
     public ModelAndView listCustomer(@RequestParam("search") Optional<String> search ,@PageableDefault(value = 3) Pageable pageable){
         Page<Customer> customers ;
         if (search.isPresent()){
@@ -85,6 +84,17 @@ public class CustomerController {
     @PostMapping("/delete-customer")
     public String deleteCustomer(@ModelAttribute("customer") Customer customer){
         customerService.remove(customer.getId());
-        return "redirect:customers";
+        return "redirect:/";
     }
+
+    @GetMapping("/user")
+    public ModelAndView userPage(){
+        return new ModelAndView("/user");
+    }
+
+//    @GetMapping("/admin")
+//    public ModelAndView adminPage(){
+//        return new ModelAndView("/customer/list");
+//    }
+
 }
